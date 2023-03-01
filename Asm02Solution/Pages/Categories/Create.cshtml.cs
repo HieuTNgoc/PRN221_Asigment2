@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Asm02Solution.Models;
 
-namespace Asm02Solution.Pages
+namespace Asm02Solution.Pages.Categories
 {
     public class CreateModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStoreContext _context;
+        private readonly Asm02Solution.Models.PizzaStore01Context _context;
 
-        public CreateModel(Asm02Solution.Models.PizzaStoreContext context)
+        public CreateModel(Asm02Solution.Models.PizzaStore01Context context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace Asm02Solution.Pages
         }
 
         [BindProperty]
-        public Account Account { get; set; }
+        public Category Category { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -35,7 +35,7 @@ namespace Asm02Solution.Pages
                 return Page();
             }
 
-            _context.Accounts.Add(Account);
+            _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

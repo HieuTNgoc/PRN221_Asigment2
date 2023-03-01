@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
 
-namespace Asm02Solution.Pages
+namespace Asm02Solution.Pages.Users
 {
     public class EditModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStoreContext _context;
+        private readonly Asm02Solution.Models.PizzaStore01Context _context;
 
-        public EditModel(Asm02Solution.Models.PizzaStoreContext context)
+        public EditModel(Asm02Solution.Models.PizzaStore01Context context)
         {
             _context = context;
         }

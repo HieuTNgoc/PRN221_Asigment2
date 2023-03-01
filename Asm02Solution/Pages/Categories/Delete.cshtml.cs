@@ -7,52 +7,52 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
 
-namespace Asm02Solution.Pages
+namespace Asm02Solution.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStoreContext _context;
+        private readonly Asm02Solution.Models.PizzaStore01Context _context;
 
-        public DeleteModel(Asm02Solution.Models.PizzaStoreContext context)
+        public DeleteModel(Asm02Solution.Models.PizzaStore01Context context)
         {
             _context = context;
         }
 
         [BindProperty]
-      public Account Account { get; set; }
+      public Category Category { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Accounts == null)
+            if (id == null || _context.Categories == null)
             {
                 return NotFound();
             }
 
-            var account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId == id);
+            var category = await _context.Categories.FirstOrDefaultAsync(m => m.CategoryId == id);
 
-            if (account == null)
+            if (category == null)
             {
                 return NotFound();
             }
             else 
             {
-                Account = account;
+                Category = category;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Accounts == null)
+            if (id == null || _context.Categories == null)
             {
                 return NotFound();
             }
-            var account = await _context.Accounts.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
 
-            if (account != null)
+            if (category != null)
             {
-                Account = account;
-                _context.Accounts.Remove(Account);
+                Category = category;
+                _context.Categories.Remove(Category);
                 await _context.SaveChangesAsync();
             }
 

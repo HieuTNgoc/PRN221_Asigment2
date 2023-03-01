@@ -1,13 +1,7 @@
 ﻿@page
-@model Asm02Solution.Pages.DetailsModel
+@model Asm02Solution.Pages.Users.DeleteModel
 
-@{
-    ViewData["Title"] = "Details";
-    Layout = "~/Pages/Index.cshtml";
-}
-
-<h1>Details</h1>
-
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Account</h4>
     <hr />
@@ -37,8 +31,10 @@
             @Html.DisplayFor(model => model.Account.Type)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Account?.AccountId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Account.AccountId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
 </div>

@@ -11,7 +11,7 @@ public partial class Account
 
     public string? Password { get; set; }
 
-    public DateTime? FullName { get; set; }
+    public string? FullName { get; set; }
 
     public short? Type { get; set; }
 }

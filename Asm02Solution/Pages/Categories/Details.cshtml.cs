@@ -7,34 +7,34 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
 
-namespace Asm02Solution.Pages
+namespace Asm02Solution.Pages.Categories
 {
     public class DetailsModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStoreContext _context;
+        private readonly Asm02Solution.Models.PizzaStore01Context _context;
 
-        public DetailsModel(Asm02Solution.Models.PizzaStoreContext context)
+        public DetailsModel(Asm02Solution.Models.PizzaStore01Context context)
         {
             _context = context;
         }
 
-      public Account Account { get; set; }
+      public Category Category { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Accounts == null)
+            if (id == null || _context.Categories == null)
             {
                 return NotFound();
             }
 
-            var account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId == id);
-            if (account == null)
+            var category = await _context.Categories.FirstOrDefaultAsync(m => m.CategoryId == id);
+            if (category == null)
             {
                 return NotFound();
             }
             else 
             {
-                Account = account;
+                Category = category;
             }
             return Page();
         }

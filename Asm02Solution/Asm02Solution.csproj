@@ -19,4 +19,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Orders\" />
+    <Folder Include="Pages\Suppliers\" />
+    <Folder Include="Pages\OrderDetails\" />
+    <Folder Include="Pages\Products\" />
+  </ItemGroup>
+
 </Project>

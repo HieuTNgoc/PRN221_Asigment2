@@ -1,31 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Asm02Solution.Models;
 
 namespace Asm02Solution.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStoreContext _context;
+        private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(Asm02Solution.Models.PizzaStoreContext context)
+        public IndexModel(ILogger<IndexModel> logger)
         {
-            _context = context;
+            _logger = logger;
         }
 
-        public IList<Account> Account { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            if (_context.Accounts != null)
-            {
-                Account = await _context.Accounts.ToListAsync();
-            }
+
         }
     }
 }

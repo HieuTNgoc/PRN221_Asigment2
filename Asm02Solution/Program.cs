@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<PizzaStoreContext>(options =>
+builder.Services.AddDbContext<PizzaStore01Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PizzaStoreDB") ?? throw new InvalidOperationException("Connection string 'PizzaStoreDB' not found.")));
 
 

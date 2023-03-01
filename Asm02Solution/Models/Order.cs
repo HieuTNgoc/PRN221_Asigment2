@@ -20,4 +20,6 @@ public partial class Order
     public int? CustomerId { get; set; }
 
     public virtual Customer? Customer { get; set; }
+
+    public virtual ICollection<OrderDetail> OrderDetails { get; } = new List<OrderDetail>();
 }
