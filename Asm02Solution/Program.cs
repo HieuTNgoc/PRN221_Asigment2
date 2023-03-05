@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,15 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromSeconds(1000);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+});
+
+// Add notify service
+builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
+{
+    ProgressBar = true,
+    PositionClass = ToastPositions.TopCenter,
+    PreventDuplicates= true,
+    CloseButton = true,
 });
 
 var app = builder.Build();

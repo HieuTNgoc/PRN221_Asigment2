@@ -13,8 +13,32 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\images\\logo.jpg",
+      "PackagePath": "staticwebassets\\images\\logo.jpg"
+    },
+    {
+      "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\images\\logo_transparent.png",
+      "PackagePath": "staticwebassets\\images\\logo_transparent.png"
+    },
+    {
       "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\lib\\bootstrap-icons\\bootstrap-icons.svg",
+      "PackagePath": "staticwebassets\\lib\\bootstrap-icons\\bootstrap-icons.svg"
+    },
+    {
+      "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\lib\\bootstrap-icons\\font\\bootstrap-icons.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap-icons\\font\\bootstrap-icons.min.css"
+    },
+    {
+      "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\lib\\bootstrap-icons\\font\\fonts\\bootstrap-icons.woff",
+      "PackagePath": "staticwebassets\\lib\\bootstrap-icons\\font\\fonts\\bootstrap-icons.woff"
+    },
+    {
+      "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\lib\\bootstrap-icons\\font\\fonts\\bootstrap-icons.woff2",
+      "PackagePath": "staticwebassets\\lib\\bootstrap-icons\\font\\fonts\\bootstrap-icons.woff2"
     },
     {
       "Id": "D:\\FPT-WorkSpace\\PRN221\\SignalRAssignment\\Asm02Solution\\wwwroot\\lib\\bootstrap\\LICENSE",

@@ -17,13 +17,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Orders\" />
-    <Folder Include="Pages\Suppliers\" />
-    <Folder Include="Pages\OrderDetails\" />
-    <Folder Include="Pages\Products\" />
+    <PackageReference Include="NToastNotify" Version="6.0.1" />
   </ItemGroup>
 
 </Project>

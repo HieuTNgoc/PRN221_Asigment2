@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Asm02Solution.Models;
+using NToastNotify;
 
 namespace Asm02Solution.Pages.Categories
 {
     public class CreateModel : PageModel
     {
         private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly IToastNotification _notify;
 
-        public CreateModel(Asm02Solution.Models.PizzaStore01Context context)
+        public CreateModel(PizzaStore01Context context, IToastNotification notify)
         {
             _context = context;
+            _notify = notify;
         }
 
         public IActionResult OnGet()
@@ -27,7 +30,6 @@ namespace Asm02Solution.Pages.Categories
         public Category Category { get; set; }
         
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
           if (!ModelState.IsValid)
@@ -36,7 +38,14 @@ namespace Asm02Solution.Pages.Categories
             }
 
             _context.Categories.Add(Category);
-            await _context.SaveChangesAsync();
+            int res = await _context.SaveChangesAsync();
+            if (res > 0)
+            {
+                _notify.AddSuccessToastMessage("Category created successfully.");
+            } else
+            {
+                _notify.AddErrorToastMessage("Category not created successfully!");
+            }
 
             return RedirectToPage("./Index");
         }
