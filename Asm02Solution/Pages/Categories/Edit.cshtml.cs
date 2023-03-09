@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
+using NToastNotify;
 
 namespace Asm02Solution.Pages.Categories
 {
     public class EditModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly PizzaStore01Context _context;
+        private readonly IToastNotification _notify;
 
-        public EditModel(Asm02Solution.Models.PizzaStore01Context context)
+        public EditModel(PizzaStore01Context context, IToastNotification notify)
         {
             _context = context;
+            _notify = notify;
         }
 
         [BindProperty]
@@ -38,8 +41,6 @@ namespace Asm02Solution.Pages.Categories
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -51,7 +52,15 @@ namespace Asm02Solution.Pages.Categories
 
             try
             {
-                await _context.SaveChangesAsync();
+                int res = await _context.SaveChangesAsync();
+                if (res > 0)
+                {
+                    _notify.AddSuccessToastMessage("Category edited successfully.");
+                }
+                else
+                {
+                    _notify.AddErrorToastMessage("Category not edited successfully!");
+                }
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -1,5 +1,5 @@
 ﻿@page
-@model Asm02Solution.Pages.Users.CreateModel
+@model Asm02Solution.Pages.Users.RegisterModel
 
 <h4>Account</h4>
 <hr />
@@ -24,20 +24,25 @@
             </div>
             <div class="form-group">
                 <label asp-for="Account.Type" class="control-label"></label>
-                <input asp-for="Account.Type" class="form-control" />
+                <select asp-for="Account.Type" class="form-control">
+                    <option value="0">Member</option>
+                    <option value="1">Staff</option>
+                </select>
                 <span asp-validation-for="Account.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Register" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Back Home</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

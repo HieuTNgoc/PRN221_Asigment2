@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
+using NToastNotify;
 
 namespace Asm02Solution.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
         private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly IToastNotification _notify;
 
-        public DeleteModel(Asm02Solution.Models.PizzaStore01Context context)
+        public DeleteModel(PizzaStore01Context context, IToastNotification notify)
         {
             _context = context;
+            _notify = notify;
         }
 
         [BindProperty]
@@ -53,7 +56,15 @@ namespace Asm02Solution.Pages.Categories
             {
                 Category = category;
                 _context.Categories.Remove(Category);
-                await _context.SaveChangesAsync();
+                int res = await _context.SaveChangesAsync();
+                if (res > 0)
+                {
+                    _notify.AddSuccessToastMessage("Category removed successfully.");
+                }
+                else
+                {
+                    _notify.AddErrorToastMessage("Category not removed successfully!");
+                }
             }
 
             return RedirectToPage("./Index");

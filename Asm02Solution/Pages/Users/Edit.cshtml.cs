@@ -12,9 +12,9 @@ namespace Asm02Solution.Pages.Users
 {
     public class EditModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly PizzaStore01Context _context;
 
-        public EditModel(Asm02Solution.Models.PizzaStore01Context context)
+        public EditModel(PizzaStore01Context context)
         {
             _context = context;
         }
@@ -38,8 +38,6 @@ namespace Asm02Solution.Pages.Users
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

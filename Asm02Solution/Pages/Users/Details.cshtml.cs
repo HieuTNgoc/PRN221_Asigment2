@@ -18,7 +18,7 @@ namespace Asm02Solution.Pages.Users
             _context = context;
         }
 
-      public Account Account { get; set; }
+        public Account Account { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
