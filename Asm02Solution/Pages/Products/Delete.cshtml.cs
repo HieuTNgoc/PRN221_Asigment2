@@ -18,11 +18,24 @@ namespace Asm02Solution.Pages.Products
             _context = context;
         }
 
+        public Account Account { get; set; } = default!;
+
         [BindProperty]
-      public Product Product { get; set; }
+        public Product Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
             if (id == null || _context.Products == null)
             {
                 return NotFound();
@@ -34,7 +47,7 @@ namespace Asm02Solution.Pages.Products
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Product = product;
             }

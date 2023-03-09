@@ -18,16 +18,32 @@ namespace Asm02Solution.Pages.Products
             _context = context;
         }
 
+        public Account Account { get; set; } = default!;
+
         public IList<Product> Product { get;set; } = default!;
 
-        public async Task OnGetAsync()
+
+        public async Task<IActionResult> OnGetAsync()
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
+
             if (_context.Products != null)
             {
                 Product = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier).ToListAsync();
             }
+            return Page();
         }
     }
 }

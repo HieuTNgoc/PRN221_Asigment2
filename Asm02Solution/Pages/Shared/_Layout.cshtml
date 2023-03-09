@@ -53,7 +53,7 @@
                             if (Model.Account != null)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-page="/Users/Details" asp-route-id="@Model.Account.AccountId"><i class="bi bi-box-arrow-in-right"></i> My Account</a>
+                                    <a class="nav-link text-white" asp-page="/Users/Details" asp-route-id="@Model.Account.AccountId"><i class="bi bi-box-arrow-in-right"></i> @Model.Account.UserName</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white" asp-page="/Index" asp-page-handler="logout"><i class="bi bi-person-check"></i> Logout</a>
