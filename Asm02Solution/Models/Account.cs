@@ -23,6 +23,6 @@ public partial class Account
     public string? FullName { get; set; }
 
     [Display(Name = "Account Type")]
-    [Range(0, 1, ErrorMessage = "Just have 2 type of account")]
+    [Range(1, 2, ErrorMessage = "Just have 2 type of account")]
     public short? Type { get; set; }
 }

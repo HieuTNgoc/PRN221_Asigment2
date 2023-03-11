@@ -1,11 +1,4 @@
-# PRN221_Asigment2
-- Dung lượng bài lớn quá nên em xin phép để link git ạ.
-- Repo: https://github.com/HieuTNgoc/PRN221_Asigment2.git
-- Student: Trần Ngọc Hiếu - HE153199
-
-
-- SQL:
-Create database PizzaStore_01
+﻿Create database PizzaStore_01
 
 -------------------------------------------------------------------------
 create table Customers(

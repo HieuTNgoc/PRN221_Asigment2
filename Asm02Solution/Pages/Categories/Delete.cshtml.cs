@@ -12,7 +12,7 @@ namespace Asm02Solution.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly PizzaStore01Context _context;
         private readonly IToastNotification _notify;
 
         public DeleteModel(PizzaStore01Context context, IToastNotification notify)
@@ -20,6 +20,7 @@ namespace Asm02Solution.Pages.Categories
             _context = context;
             _notify = notify;
         }
+        public Account Account { get; set; } = default!;
 
         [BindProperty]
       public Category Category { get; set; }

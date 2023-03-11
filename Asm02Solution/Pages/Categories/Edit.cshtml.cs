@@ -21,6 +21,7 @@ namespace Asm02Solution.Pages.Categories
             _context = context;
             _notify = notify;
         }
+        public Account Account { get; set; } = default!;
 
         [BindProperty]
         public Category Category { get; set; } = default!;

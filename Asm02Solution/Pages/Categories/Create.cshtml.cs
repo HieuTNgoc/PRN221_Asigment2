@@ -12,7 +12,7 @@ namespace Asm02Solution.Pages.Categories
 {
     public class CreateModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly PizzaStore01Context _context;
         private readonly IToastNotification _notify;
 
         public CreateModel(PizzaStore01Context context, IToastNotification notify)
@@ -20,6 +20,8 @@ namespace Asm02Solution.Pages.Categories
             _context = context;
             _notify = notify;
         }
+        public Account Account { get; set; } = default!;
+
 
         public IActionResult OnGet()
         {

@@ -18,14 +18,29 @@ namespace Asm02Solution.Pages.Users
             _context = context;
         }
 
-        public IList<Account> Account { get;set; } = default!;
+        [BindProperty]
+        public Account Account { get; set; } = default!;
+        public IList<Account> Accounts { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (_context.Accounts != null)
             {
-                Account = await _context.Accounts.ToListAsync();
+                Accounts = await _context.Accounts.ToListAsync();
             }
+
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
     }
 }

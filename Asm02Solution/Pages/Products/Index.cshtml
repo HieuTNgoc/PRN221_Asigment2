@@ -20,10 +20,10 @@
                 @Html.DisplayNameFor(model => model.Product[0].ProductImage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Category)
+                @Html.DisplayNameFor(model => model.Product[0].Category.CategoryName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Supplier)
+                @Html.DisplayNameFor(model => model.Product[0].Supplier.CompanyName)
             </th>
             <th></th>
         </tr>
@@ -41,13 +41,13 @@
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
+                    <img alt="Image.png" src="@Html.DisplayFor(modelItem => item.ProductImage)">
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier.SupplierId)
+                @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |

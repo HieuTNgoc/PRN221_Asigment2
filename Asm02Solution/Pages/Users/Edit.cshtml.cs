@@ -62,8 +62,7 @@ namespace Asm02Solution.Pages.Users
                     throw;
                 }
             }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new {id = Account.AccountId});
         }
 
         private bool AccountExists(int id)

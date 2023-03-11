@@ -6,17 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
+using NToastNotify;
 
 namespace Asm02Solution.Pages.Customers
 {
     public class DeleteModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly PizzaStore01Context _context;
+        private readonly IToastNotification _notify;
 
-        public DeleteModel(Asm02Solution.Models.PizzaStore01Context context)
+        public DeleteModel(PizzaStore01Context context, IToastNotification notify)
         {
             _context = context;
+            _notify = notify;
         }
+        public Account Account { get; set; } = default!;
 
         [BindProperty]
       public Customer Customer { get; set; }

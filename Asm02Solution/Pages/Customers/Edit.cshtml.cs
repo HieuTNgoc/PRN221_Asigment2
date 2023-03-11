@@ -7,17 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
+using NToastNotify;
 
 namespace Asm02Solution.Pages.Customers
 {
     public class EditModel : PageModel
     {
-        private readonly Asm02Solution.Models.PizzaStore01Context _context;
+        private readonly PizzaStore01Context _context;
+        private readonly IToastNotification _notify;
 
-        public EditModel(Asm02Solution.Models.PizzaStore01Context context)
+        public EditModel(PizzaStore01Context context, IToastNotification notify)
         {
             _context = context;
+            _notify = notify;
         }
+        public Account Account { get; set; } = default!;
 
         [BindProperty]
         public Customer Customer { get; set; } = default!;

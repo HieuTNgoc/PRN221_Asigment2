@@ -2,28 +2,28 @@
 @model Asm02Solution.Pages.Users.IndexModel
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Register">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Account[0].UserName)
+                @Html.DisplayNameFor(model => model.Accounts[0].UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Account[0].Password)
+                @Html.DisplayNameFor(model => model.Accounts[0].Password)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Account[0].FullName)
+                @Html.DisplayNameFor(model => model.Accounts[0].FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Account[0].Type)
+                @Html.DisplayNameFor(model => model.Accounts[0].Type)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Account) {
+@foreach (var item in Model.Accounts) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
