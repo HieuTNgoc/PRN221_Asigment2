@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Asm02Solution.Models;
 using NToastNotify;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asm02Solution.Pages.Categories
 {
@@ -22,9 +23,19 @@ namespace Asm02Solution.Pages.Categories
         }
         public Account Account { get; set; } = default!;
 
-
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
 
