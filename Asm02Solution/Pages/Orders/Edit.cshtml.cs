@@ -22,6 +22,8 @@ namespace Asm02Solution.Pages.Orders
 
         [BindProperty]
         public Order Order { get; set; } = default!;
+        [BindProperty]
+        public Product Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

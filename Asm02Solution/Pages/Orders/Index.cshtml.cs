@@ -20,7 +20,10 @@ namespace Asm02Solution.Pages.Orders
         public Account Account { get; set; } = default!;
 
         public IList<Order> Order { get;set; } = default!;
+        public IList<OrderDetail> OrderDetail { get; set; } = default!;
 
+        [BindProperty]
+        public Product Product { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
             int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
@@ -35,10 +38,9 @@ namespace Asm02Solution.Pages.Orders
                 return NotFound();
             }
 
-            if (_context.Orders != null)
+            if (_context.OrderDetails != null)
             {
-                Order = await _context.Orders
-                .Include(o => o.Customer).ToListAsync();
+                OrderDetail = await _context.OrderDetails.Include(o => o.Order).Include(o => o.Product).ToListAsync();
             }
 
             return Page();

@@ -19,7 +19,7 @@ namespace Asm02Solution.Pages.Orders
             _context = context;
         }
         public Account Account { get; set; } = default!;
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
             if (curr_account_id == null)
@@ -32,25 +32,39 @@ namespace Asm02Solution.Pages.Orders
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
+
+            var product = await _context.Products.FirstOrDefaultAsync(m => m.ProductId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Product = product;
+            }
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "ContactName");
             return Page();
         }
 
         [BindProperty]
-        public Order Order { get; set; }
-        
+        public Product Product { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        [BindProperty]
+        public Order Order { get; set; }
+
+        [BindProperty]
+        public OrderDetail OrderDetail { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             _context.Orders.Add(Order);
             await _context.SaveChangesAsync();
 
+            OrderDetail.OrderId = Order.OrderId;
+            _context.OrderDetails.Add(OrderDetail);
+            await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
     }

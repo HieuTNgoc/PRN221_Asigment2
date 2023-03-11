@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Asm02Solution.Models;
 
 public partial class OrderDetail
 {
     public int OrderId { get; set; }
+    [Display(Name = "Product")]
 
     public int ProductId { get; set; }
 

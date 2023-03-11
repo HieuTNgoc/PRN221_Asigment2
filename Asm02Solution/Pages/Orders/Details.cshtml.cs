@@ -20,6 +20,10 @@ namespace Asm02Solution.Pages.Orders
         public Account Account { get; set; } = default!;
 
         public Order Order { get; set; }
+        [BindProperty]
+        public Product Product { get; set; }
+        [BindProperty]
+        public OrderDetail OrderDetail { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -48,6 +52,15 @@ namespace Asm02Solution.Pages.Orders
             else 
             {
                 Order = order;
+            }
+            var orderdetail = await _context.OrderDetails.FirstOrDefaultAsync(m => m.OrderId == id);
+            if (orderdetail == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                OrderDetail = orderdetail;
             }
             return Page();
         }
