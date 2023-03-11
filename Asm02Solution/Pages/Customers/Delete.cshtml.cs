@@ -6,19 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Asm02Solution.Models;
-using NToastNotify;
 
 namespace Asm02Solution.Pages.Customers
 {
     public class DeleteModel : PageModel
     {
-        private readonly PizzaStore01Context _context;
-        private readonly IToastNotification _notify;
+        private readonly Asm02Solution.Models.PizzaStore01Context _context;
 
-        public DeleteModel(PizzaStore01Context context, IToastNotification notify)
+        public DeleteModel(Asm02Solution.Models.PizzaStore01Context context)
         {
             _context = context;
-            _notify = notify;
         }
         public Account Account { get; set; } = default!;
 
@@ -27,6 +24,18 @@ namespace Asm02Solution.Pages.Customers
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
+
             if (id == null || _context.Customers == null)
             {
                 return NotFound();

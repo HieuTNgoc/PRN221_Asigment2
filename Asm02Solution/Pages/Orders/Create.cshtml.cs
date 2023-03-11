@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Asm02Solution.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asm02Solution.Pages.Orders
 {
@@ -17,10 +18,21 @@ namespace Asm02Solution.Pages.Orders
         {
             _context = context;
         }
-
-        public IActionResult OnGet()
+        public Account Account { get; set; } = default!;
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
             return Page();
         }
 

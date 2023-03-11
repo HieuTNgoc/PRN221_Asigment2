@@ -17,16 +17,31 @@ namespace Asm02Solution.Pages.Orders
         {
             _context = context;
         }
+        public Account Account { get; set; } = default!;
 
         public IList<Order> Order { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
+
             if (_context.Orders != null)
             {
                 Order = await _context.Orders
                 .Include(o => o.Customer).ToListAsync();
             }
+
+            return Page();
         }
     }
 }

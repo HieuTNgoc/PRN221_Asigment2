@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Asm02Solution.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asm02Solution.Pages.Suppliers
 {
@@ -17,9 +18,21 @@ namespace Asm02Solution.Pages.Suppliers
         {
             _context = context;
         }
+        public Account Account { get; set; } = default!;
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
 
@@ -27,7 +40,6 @@ namespace Asm02Solution.Pages.Suppliers
         public Supplier Supplier { get; set; }
         
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
           if (!ModelState.IsValid)

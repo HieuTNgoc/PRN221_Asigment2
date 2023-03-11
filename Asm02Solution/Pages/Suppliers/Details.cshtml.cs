@@ -17,11 +17,28 @@ namespace Asm02Solution.Pages.Suppliers
         {
             _context = context;
         }
+        public Account Account { get; set; } = default!;
 
-      public Supplier Supplier { get; set; }
+        public Supplier Supplier { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            int? curr_account_id = HttpContext.Session.GetInt32("AccountId");
+            if (curr_account_id == null)
+            {
+                return Redirect("/Users/Login");
+            }
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.AccountId.Equals(curr_account_id));
+
+            if (Account == null)
+            {
+                return NotFound();
+            }
+            if (id == null || _context.Products == null)
+            {
+                return NotFound();
+            }
+
             if (id == null || _context.Suppliers == null)
             {
                 return NotFound();

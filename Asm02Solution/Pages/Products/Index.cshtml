@@ -50,9 +50,21 @@
                 @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
+                    @{
+                        if (Model.Account != null)
+                        {
+                            if (Model.Account.Type == 1)
+                            {
+                                <div>
+                                <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
+                                <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
+                                </div>
+                            } else {
+                                <a asp-page="/Orders/Create" asp-route-id="@item.ProductId">Order</a>
+                            }
+                        }
+                    }
             </td>
         </tr>
 }
